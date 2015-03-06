@@ -115,11 +115,16 @@ bool dH264::collectFrame(uint8_t *src, int srcsize){
   //he have collected all of nalunits.
   if(len){
 
-    
-    
     //call decoder
     decodeFrame(&buffer[0], size);
-    
+
+    //Reset decoder to avoid delay
+    if(ccount == 500){
+      avcodec_flush_buffers(codec_context);
+      ccount = 0;
+    }
+    ccount++;
+
     //Erase stored nalunit to prepaer next frame.
     buffer.erase(buffer.begin(), buffer.begin() + len);
     return true;

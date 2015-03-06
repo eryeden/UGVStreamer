@@ -33,7 +33,7 @@ public:
   void copyyuvframe(uint8_t *out);
   
 private:
-  uint8_t ccount;
+  uint32_t ccount;
   
   AVCodec* codec; /* the AVCodec* which represents the H264 decoder */
 
