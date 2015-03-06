@@ -17,7 +17,7 @@ LDFLAGS+=`sdl2-config --libs`
 
 INCLUDES+=
 
-TARGET = test_rcvdec
+TARGET = test_rcvdec.bin
 SRCS = test_rcvdec dh264 v4l2cap reciever
 OBJS = $(addsuffix .o,$(SRCS))
 
