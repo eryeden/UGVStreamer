@@ -5,7 +5,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <error.h>
+//#include <error.h>
 
 extern "C"{
 #include <SDL.h>

@@ -9,7 +9,7 @@
 #include <fcntl.h> 
 #include <unistd.h>
 #include <errno.h>
-#include <malloc.h>
+//#include <malloc.h>
 #include <sys/stat.h>
 #include <sys/types.h>
 #include <sys/time.h>
@@ -19,7 +19,9 @@
 #include <netinet/tcp.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>
-#include <asm/types.h>
+
+//#include <asm/types.h>
+
 #include <pthread.h>
 
 #include <vector>

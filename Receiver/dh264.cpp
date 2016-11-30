@@ -67,11 +67,11 @@ bool dH264::initialize_decoder(){
   outyuv = av_frame_alloc();
   outrgb = av_frame_alloc();
 
-  buffyuv = (uint8_t *)av_malloc(avpicture_get_size(PIX_FMT_YUV420P, 640, 480));
-  avpicture_fill((AVPicture *)outyuv, buffyuv, PIX_FMT_YUV420P, 640, 480);
-  
-  buffrgb = (uint8_t *)av_malloc(avpicture_get_size(PIX_FMT_RGB24,  640, 480));
-  avpicture_fill((AVPicture *)outrgb, buffrgb, PIX_FMT_RGB24, 640, 480);
+  buffyuv = (uint8_t *) av_malloc(avpicture_get_size(AV_PIX_FMT_YUV420P, 640, 480));
+  avpicture_fill((AVPicture *) outyuv, buffyuv, AV_PIX_FMT_YUV420P, 640, 480);
+
+  buffrgb = (uint8_t *) av_malloc(avpicture_get_size(AV_PIX_FMT_RGB24, 640, 480));
+  avpicture_fill((AVPicture *) outrgb, buffrgb, AV_PIX_FMT_RGB24, 640, 480);
 
   
   //Initialize H264 parser
@@ -171,9 +171,9 @@ bool dH264::decodeFrame(uint8_t *src, int srcsize){
   
   //YUV420P settings
   sws_context = sws_getContext(codec_context->width, codec_context->height,
-  			       codec_context->pix_fmt,
-  			       codec_context->width, codec_context->height,
-  			       PIX_FMT_YUV420P, SWS_BILINEAR, NULL, NULL, NULL);
+							   codec_context->pix_fmt,
+							   codec_context->width, codec_context->height,
+							   AV_PIX_FMT_YUV420P, SWS_BILINEAR, NULL, NULL, NULL);
  
   
   //YUV420P output

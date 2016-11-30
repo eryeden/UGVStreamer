@@ -14,14 +14,32 @@ if (APPLE)
     set(CMAKE_CXX_COMPILER /usr/local/bin/g++-6)
 endif ()
 
+
+#SDL2 congfiguration
 find_package(SDL2 REQUIRED)
 include_directories(${SDL2_INCLUDE_DIRS})
 
-#source files
-file(GLOB SRCS ./*.cpp)
+#ffmpeg configuration
+set(FFMPEG_LIBS
+        avcodec
+        avresample
+        avutil
+        swscale
+        )
 
-add_executable(sdl_test ${SRCS})
-target_link_libraries(sdl_test ${SDL2_LIBRARIES})
+#set(FFMPEG_LIBS
+#        "-L/usr/local/Cellar/ffmpeg/HEAD/lib -lavcodec -lx264  -lavresample -lavutil"
+#        "-L/usr/local/Cellar/ffmpeg/HEAD/lib -lswscale -lm -lavutil -lm"
+#        )
+
+set(LINK_LIBS ${SDL2_LIBRARIES} ${FFMPEG_LIBS})
+
+
+add_subdirectory(Receiver)
+
+
+
+
 
 
 
