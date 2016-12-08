@@ -6,16 +6,24 @@
 #include <string.h>
 #include <vector>
 
-extern "C"{
+extern "C" {
 #include <libavcodec/avcodec.h>
 #include <libavutil/avutil.h>
 //#include <libavutil/pixfmt.h>
 #include <libswscale/swscale.h>
 }
 
+class Constants {
 
-class dH264{
-public:
+ public:
+
+  static const int WIDTH = 1280;
+  static const int HEIGHT = 720;
+
+};
+
+class dH264 {
+ public:
   dH264();
   ~dH264();
 
@@ -26,32 +34,32 @@ public:
 
   bool decodeFrame(uint8_t *src, int srcsize);
 
-  void saveframergb(char * fname);
+  void saveframergb(char *fname);
 
-  void saveframeyuv(char * fname);
+  void saveframeyuv(char *fname);
 
   void copyrgbframe(uint8_t *out);
   void copyyuvframe(uint8_t *out);
-  
-private:
+
+ private:
   uint32_t ccount;
-  
-  AVCodec* codec; /* the AVCodec* which represents the H264 decoder */
 
-  AVCodecContext* codec_context; /* the context; keeps generic state */
+  AVCodec *codec; /* the AVCodec* which represents the H264 decoder */
 
-  AVCodecParserContext* parser;
+  AVCodecContext *codec_context; /* the context; keeps generic state */
+
+  AVCodecParserContext *parser;
   //parser that is used to decode the h264 bitstream
 
   struct SwsContext *sws_context;
-  
+
 
   //AVPicture yuvout;
-  
+
   uint8_t *inbuf; // will contain a encoded picture
   int16_t inbuffsize; //size of encoded picture
 
-  void* cb_user;
+  void *cb_user;
   /* the void* with user data that is passed into the set callback */
 
   uint64_t frame_timeout; /* timeout when we need to parse a new frame */
@@ -61,24 +69,19 @@ private:
   std::vector<uint8_t> buffer;
   /* buffer we use to keep track of read/unused bitstream data */
 
-public:
-  AVFrame* picture; //will contain a decoded picture
+ public:
+  AVFrame *picture; //will contain a decoded picture
   int outbuffsize; //size of decoded picture
 
-  AVFrame* outyuv;
+  AVFrame *outyuv;
   int outyuvsize;
-  uint8_t * buffyuv;
+  uint8_t *buffyuv;
 
-  AVFrame* outrgb;
+  AVFrame *outrgb;
   int outrgbsize;
-  uint8_t * buffrgb;
-  
+  uint8_t *buffrgb;
+
 };
-
-
-
-
-
 
 #endif /* _DH264_H_ */
 

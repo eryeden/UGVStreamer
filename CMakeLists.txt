@@ -15,27 +15,35 @@ if (APPLE)
 endif ()
 
 
-#SDL2 congfiguration
-find_package(SDL2 REQUIRED)
-include_directories(${SDL2_INCLUDE_DIRS})
+if (APPLE)
 
-#ffmpeg configuration
-set(FFMPEG_LIBS
-        avcodec
-        avresample
-        avutil
-        swscale
-        )
+    #SDL2 congfiguration
+    find_package(SDL2 REQUIRED)
+    include_directories(${SDL2_INCLUDE_DIRS})
 
-#set(FFMPEG_LIBS
-#        "-L/usr/local/Cellar/ffmpeg/HEAD/lib -lavcodec -lx264  -lavresample -lavutil"
-#        "-L/usr/local/Cellar/ffmpeg/HEAD/lib -lswscale -lm -lavutil -lm"
-#        )
+    #ffmpeg configuration
+    set(FFMPEG_LIBS
+            avcodec
+            avresample
+            avutil
+            swscale
+            )
 
-set(LINK_LIBS ${SDL2_LIBRARIES} ${FFMPEG_LIBS})
+    #set(FFMPEG_LIBS
+    #        "-L/usr/local/Cellar/ffmpeg/HEAD/lib -lavcodec -lx264  -lavresample -lavutil"
+    #        "-L/usr/local/Cellar/ffmpeg/HEAD/lib -lswscale -lm -lavutil -lm"
+    #        )
+
+    set(LINK_LIBS ${SDL2_LIBRARIES} ${FFMPEG_LIBS})
+
+else ()
+    set(LINK_LIBS)
+endif ()
 
 
 add_subdirectory(Receiver)
+add_subdirectory(Streamer)
+
 
 
 

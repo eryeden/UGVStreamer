@@ -67,11 +67,23 @@ bool dH264::initialize_decoder(){
   outyuv = av_frame_alloc();
   outrgb = av_frame_alloc();
 
-  buffyuv = (uint8_t *) av_malloc(avpicture_get_size(AV_PIX_FMT_YUV420P, 640, 480));
-  avpicture_fill((AVPicture *) outyuv, buffyuv, AV_PIX_FMT_YUV420P, 640, 480);
+  buffyuv = (uint8_t *) av_malloc(avpicture_get_size(AV_PIX_FMT_YUV420P,
+													 Constants::WIDTH,
+													 Constants::HEIGHT));
+  avpicture_fill((AVPicture *) outyuv,
+				 buffyuv,
+				 AV_PIX_FMT_YUV420P,
+				 Constants::WIDTH,
+				 Constants::HEIGHT);
 
-  buffrgb = (uint8_t *) av_malloc(avpicture_get_size(AV_PIX_FMT_RGB24, 640, 480));
-  avpicture_fill((AVPicture *) outrgb, buffrgb, AV_PIX_FMT_RGB24, 640, 480);
+  buffrgb = (uint8_t *) av_malloc(avpicture_get_size(AV_PIX_FMT_RGB24,
+													 Constants::WIDTH,
+													 Constants::HEIGHT));
+  avpicture_fill((AVPicture *) outrgb,
+				 buffrgb,
+				 AV_PIX_FMT_RGB24,
+				 Constants::WIDTH,
+				 Constants::HEIGHT);
 
   
   //Initialize H264 parser
